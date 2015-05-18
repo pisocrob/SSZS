@@ -6,4 +6,4 @@ result = root.generateXML('Catpain pugWeshington', '4', '250')
 
 print root.XMLToString(result)
 
-root.XMLToFile(result, 'test1.txt')
+root.XMLToFile(result, 'test1.xml')
