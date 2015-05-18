@@ -1,11 +1,12 @@
 from nose.tools import *
-import SSZS
+from SSZS.writer import XMLWriter
 
-def setup():
-	print "SETUP!"
+#fix this shit
 
-def teardown():
-	print "TEAR DOWN!"
+def test_generateXML():
+    generation = XMLWriter()
+    generation.generateXML('captn', '250', '77')
 
-def test_basic():
-	print "I RAN!"
+    assert_equal(generation.vname, 'captn')
+    assert_equal(generation.vyears, '250')
+    assert_equal(generation.vechoes, '77')
