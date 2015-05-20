@@ -5,14 +5,8 @@ This project is primarily a learning exercise, as my first attempt at learning P
 
 # Current State
 
-I am currently working on the XML parsing to store information about each captain/voyage. Basic writer functionality exists.
+I am currently working on the XML parsing to store information about each captain/voyage. Basic writer functionality exists. (And on this branch, it is broken).
 
 # Next Steps
 
 Fixing the current AttributeError bug and merging with master
-
-# Notes
-
-As Java is/was my first language I am using the same naming conventions here. I am aware of PEPMy thinking being that I already use it so I'm sticking with it.
-A lot of people seem to use mixedCase for Python.
-snake_case_is_really_ugly.
