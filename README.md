@@ -5,11 +5,11 @@ This project is primarily a learning exercise, as my first attempt at learning P
 
 # Current State
 
-I am currently working on the XML parsing to store information about each captain/voyage. Basical writer functionality exists.
+I am currently working on the XML parsing to store information about each captain/voyage. Basic writer functionality exists.
 
 # Next Steps
 
-Researching and then creating working tests.
+Fixing the current AttributeError bug and merging with master
 
 # Notes
 
