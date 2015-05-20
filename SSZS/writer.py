@@ -1,23 +1,40 @@
-from xml.etree.ElementTree import Element, SubElement, tostring
+from xml.etree.ElementTree import Element, SubElement, tostring, ElementTree
+from xml.dom import minidom
 #from ElementTree_pretty import prettify
-class XMLWriter:
+class XMLWriter(object):
+
+    def __init__(self):
+        self.root = None
+        self.name = None
+        self.years = None
+        self.echoes = None
+        self.outFile = None
+        self.roughString = None
+        self.prettyString = None
 
     def generateXML(self, vname, vyears, vechoes):
-        root = Element('voyage')
-        name = SubElement(root, 'name')
-        name.text = vname
+        self.root = Element('voyage')
+        self.name = SubElement(self.root, 'name')
+        self.name.text = vname
 
-        years = SubElement(root, 'YearsAtZee')
-        years.text = vyears
+        self.years = SubElement(self.root, 'YearsAtZee')
+        self.years.text = vyears
 
-        echoes = SubElement(root, 'Echoes')
-        echoes.text = vechoes
+        self.echoes = SubElement(self.root, 'Echoes')
+        self.echoes.text = vechoes
 
-        return root
 
-    def XMLToString(self, root):
-        return tostring (root)
+    def xMLToString(self, XMLObject):
+        return ElementTree.tostring(XMLObject, 'utf-8')
 
-    def XMLToFile(self, XMLObject, filename):
-        outFile = open(filename, 'w')
-        outFile.write(tostring(XMLObject))
+    def xMLToFile(self, XMLObject, filename):
+        self.outFile = open(filename, 'w')
+        self.outFile.write(ElementTree.tostring(XMLObject, 'utf-8', 'xml'))
+
+        #recurrent 'no attribute error' - Google suggests indenting but
+        #this seems to be in order?
+
+    def prettifyXML(self, XMLObject):
+        self.roughString = ElementTree.tostring(XMLObject, 'utf-8', 'xml')
+        self.prettyString = minidom.parseString(self.roughString)
+        return self.prettyString.toprettyxml (indent="    ")
