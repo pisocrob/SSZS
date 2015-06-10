@@ -36,14 +36,14 @@ class XMLWriter(object):
         return self.root
 
 
-    def xMLToString(self, xMLObject):
-        return tostring(xMLObject)
+    def xMLToString(self, xmlObject):
+        return tostring(xmlObject)
 
-    def xMLToFile(self, xMLObject, filename):
-        self.tree = ElementTree(xMLObject)
+    def xMLToFile(self, xmlObject, filename):
+        self.tree = ElementTree(xmlObject)
         self.tree.write(filename, 'UTF-8', 'xml')
 
-    def prettifyXML(self, xMLObject):
-        self.roughString = tostring(xMLObject)
+    def prettifyXML(self, xmlObject):
+        self.roughString = tostring(xmlObject)
         self.prettyString = minidom.parseString(self.roughString)
         return self.prettyString.toprettyxml (indent="    ")

@@ -5,8 +5,12 @@ This project is primarily a learning exercise, as my first attempt at learning P
 
 # Current State
 
-I am currently working on the XML parsing to store information about each captain/voyage. Basic writer functionality exists. (And on this branch, it is broken).
+I am currently working on the XML parsing to store information about each captain/voyage. Basic reader & writer functionality exists.
 
 # Next Steps
 
-Fixing the current AttributeError bug and merging with master
+Start work on the GUI
+
+# Testing
+
+As my time is limited I have elected to attempt to learn the testing framework at a later date and concerntrate on just producing something that functions for now.
