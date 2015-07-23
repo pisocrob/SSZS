@@ -11,11 +11,12 @@ class XMLWriter(object):
         self.echoes = None
         self.coD = None
         self.zeeStory = None
+        #maybe get rid of outfile var?
         self.outFile = None
         self.roughString = None
         self.prettyString = None
 
-        #coD is short for Cause of Death
+        #Maybe change to take list as parameter?
     def generateXML(self, name, years, echoes, coD, zeeStory):
         self.root = Element('Voyage')
         self.name = SubElement(self.root, 'Name')
@@ -27,6 +28,7 @@ class XMLWriter(object):
         self.echoes = SubElement(self.root, 'Echoes')
         self.echoes.text = echoes
 
+        #coD is short for Cause of Death
         self.coD = SubElement(self.root, 'CauseOfDeath')
         self.coD.text = coD
 
