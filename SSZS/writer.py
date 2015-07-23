@@ -1,6 +1,8 @@
 from xml.etree.ElementTree import Element, SubElement, tostring, ElementTree
 from xml.dom import minidom
 
+
+#TODO: Add dateAdded attribute for each xml entry
 class XMLWriter(object):
 
     def __init__(self):
