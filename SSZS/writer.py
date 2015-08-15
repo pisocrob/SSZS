@@ -18,22 +18,22 @@ class XMLWriter(object):
         self.prettyString = None
 
         #coD is short for Cause of Death
-    def generateXML(self, name, years, echoes, coD, zeeStory):
+    def generateXML(self, storyList):
         self.root = Element('Voyage')
         self.name = SubElement(self.root, 'Name')
-        self.name.text = name
+        self.name.text = storyList[0]
 
         self.years = SubElement(self.root, 'YearsAtZee')
-        self.years.text = years
+        self.years.text = storyList[1]
 
         self.echoes = SubElement(self.root, 'Echoes')
-        self.echoes.text = echoes
+        self.echoes.text = storyList[2]
 
         self.coD = SubElement(self.root, 'CauseOfDeath')
-        self.coD.text = coD
+        self.coD.text = storyList[3]
 
         self.zeeStory = SubElement(self.root, 'ZeeStory')
-        self.zeeStory.text = zeeStory
+        self.zeeStory.text = storyList[4]
 
         return self.root
 

@@ -1,41 +1,14 @@
 import Tkinter
-from pubsub import pub
-from writer import XMLWriter
+from writer import XMLWriter 
 
-class Home(object):
+class InfoEntry(Tkinter.Tk):
     def __init__(self, parent):
-        self.root = parent
-        self.frame = Tkinter.Frame(parent)
-        self.frame.grid()
-        self.initialise()
-
-    def initialise(self):
-        
-        self.root.title('SS:ZS ~ Home')
-
-        self.newEntryButton = Tkinter.Button(self.frame,text=u'Enter new Zee Story',command=self.newEntryClick)
-        self.newEntryButton.grid(column=0,row=0,sticky='EW')
-
-        self.viewStoriesButton = Tkinter.Button(self.frame, text=u'View recorded Stories',command=self.viewStoriesClick)
-        self.viewStoriesButton.grid(column=0,row=1,sticky='EW')
-
-    def newEntryClick(self):
-        self.root.withdraw()
-        entryFrame = InfoEntry()
-
-    def viewStoriesClick(self):
-        print 'recorded stories test'
-
-
-class InfoEntry(Tkinter.Toplevel):
-    def __init__(self):
-        Tkinter.Toplevel.__init__(self)
+        Tkinter.Tk.__init__(self, parent)
+        self.parent = parent
         self.initialise()
 
     def initialise(self):
         self.grid()
-        self.title('SS:ZS ~ Add Entry')
-        self.protocol("WM_DELETE_WINDOW", root.destroy)
 
         self.writer = XMLWriter()
         self.xml = None
@@ -61,7 +34,6 @@ class InfoEntry(Tkinter.Toplevel):
         self.coDVariable = Tkinter.StringVar()
         self.coD = Tkinter.Entry(self, textvariable=self.coDVariable)
         self.coD.grid(column=0, row=3, sticky='EW')
-        self.coD.bind('<Return>',self.onPressEnter)
         self.coDVariable.set('Cause of Death')
 
         #use text widget instead of Entry to allow for multiple lines.
@@ -69,7 +41,6 @@ class InfoEntry(Tkinter.Toplevel):
         self.zeeStoryVariable = Tkinter.StringVar()
         self.zeeStory = Tkinter.Entry(self, textvariable=self.zeeStoryVariable)
         self.zeeStory.grid(column=0, row=4, sticky='EW')
-        self.zeeStory.bind('<Return>',self.onPressEnter)
         self.zeeStoryVariable.set("Tell your Captain's story")
 
         #will be made functional after deciding on best usage
@@ -94,25 +65,22 @@ class InfoEntry(Tkinter.Toplevel):
         self.name.focus_set()
         self.name.selection_range(0, Tkinter.END)
 
-
-    def storyToFile(self):
-        self.storyList = [self.nameVariable.get(), self.yearsVariable.get(), self.echoesVariable.get(), self.coDVariable.get(), self.zeeStoryVariable.get()]
-        self.xml = self.writer.generateXML(self.storyList)
-        self.fileName = '' + self.storyList[0] + '.xml'
-        self.writer.xMLToFile(self.xml, self.fileName)
-        self.labelVariable.set(self.nameVariable.get()+"'s story has been recorded")
+    def onButtonClick(self):
+        self.xml = self.writer.generateXML(self.nameVariable.get(), self.yearsVariable.get(), self.echoesVariable.get(), self.coDVariable.get(), self.zeeStoryVariable.get())
+        self.writer.xMLToFile(self.xml, 'test1.xml')
+        self.labelVariable.set(self.nameVariable.get()+' Clicked button yo!')
         self.name.focus_set()
         self.name.selection_range(0, Tkinter.END)
 
-    def onButtonClick(self):
-        self.storyToFile()
-        
-
     def onPressEnter(self, event):
-        self.storyToFile()
+        #This isn't very pretty. Change generateXML to take a list?
+        self.xml = self.writer.generateXML(self.nameVariable.get(), self.yearsVariable.get(), self.echoesVariable.get(), self.coDVariable.get(), self.zeeStoryVariable.get())
+        self.writer.xMLToFile(self.xml, 'test1.xml')
+        self.labelVariable.set(self.nameVariable.get()+' Hit enter yo!')
+        self.name.focus_set()
+        self.name.selection_range(0, Tkinter.END)
 
 if __name__ == '__main__':
-    root = Tkinter.Tk()
-    app = Home(root)
-    #app.title('SS:ZS ~ Info Entry')
-    root.mainloop()
+    app = InfoEntry(None)
+    app.title('SSZS: Info Entry')
+    app.mainloop()
