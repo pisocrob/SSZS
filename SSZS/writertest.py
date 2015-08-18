@@ -1,9 +1,10 @@
 from writer import XMLWriter
 
 root = XMLWriter()
-result = root.generateXML('Lord Rot', '2', '250', 'mutiny', 'user written story goes in here')
+info = ['Lord Rot', '2', '250', 'Mutiny', "Storm's curse is a powerful thing"]
+result = root.generateXML(info)
 
 print root.prettifyXML(result)
-root.xMLToFile(result, 'test1.xml')
+root.xmlToFile(result)
 
 

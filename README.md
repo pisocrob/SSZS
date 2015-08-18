@@ -5,12 +5,13 @@ This project is primarily a learning exercise. As my first attempt at learning P
 
 # Current State
 
-Very rough GUI for entering data and writing to file exists.
+
+I am currently working on improving the interface and the view stories window.
 
 # Next Steps
 
-Create a naming scheme and proper filepaths to enable multiple entries to be stored.
-Create a GUI to browse through stored entries and view them. Prettify both GUI's.
+Adding more functionality to the GUI. Start looking at the more complex features such as reading Sunless Sea's save files for information about Captains.
+
 
 # Testing
 
