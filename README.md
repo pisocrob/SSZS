@@ -5,11 +5,11 @@ This project is primarily a learning exercise, as my first attempt at learning P
 
 # Current State
 
-I am currently working on the XML parsing to store information about each captain/voyage. Basic reader & writer functionality exists.
+I am currently working on improving the interface and the view stories window.
 
 # Next Steps
 
-Start work on the GUI
+Adding more functionality to the GUI. Start looking at the more complex features such as reading Sunless Sea's save files for information about Captains.
 
 # Testing
 

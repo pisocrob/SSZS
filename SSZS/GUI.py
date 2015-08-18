@@ -67,7 +67,7 @@ class InfoEntry(Tkinter.Tk):
 
     def onButtonClick(self):
         self.xml = self.writer.generateXML(self.nameVariable.get(), self.yearsVariable.get(), self.echoesVariable.get(), self.coDVariable.get(), self.zeeStoryVariable.get())
-        self.writer.xMLToFile(self.xml, 'test1.xml')
+        self.writer.xmlToFile(self.xml, 'test1.xml')
         self.labelVariable.set(self.nameVariable.get()+' Clicked button yo!')
         self.name.focus_set()
         self.name.selection_range(0, Tkinter.END)
@@ -75,7 +75,7 @@ class InfoEntry(Tkinter.Tk):
     def onPressEnter(self, event):
         #This isn't very pretty. Change generateXML to take a list?
         self.xml = self.writer.generateXML(self.nameVariable.get(), self.yearsVariable.get(), self.echoesVariable.get(), self.coDVariable.get(), self.zeeStoryVariable.get())
-        self.writer.xMLToFile(self.xml, 'test1.xml')
+        self.writer.xmlToFile(self.xml, 'test1.xml')
         self.labelVariable.set(self.nameVariable.get()+' Hit enter yo!')
         self.name.focus_set()
         self.name.selection_range(0, Tkinter.END)

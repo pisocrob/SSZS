@@ -2,6 +2,11 @@ import Tkinter
 from pubsub import pub
 from writer import XMLWriter
 
+#TODO:
+#Resize home and into entry windows
+#Create view stories window
+#improve descriptions/auto select etc for info entry screen
+
 class Home(object):
     def __init__(self, parent):
         self.root = parent
@@ -94,19 +99,16 @@ class InfoEntry(Tkinter.Toplevel):
         self.name.focus_set()
         self.name.selection_range(0, Tkinter.END)
 
-
     def storyToFile(self):
         self.storyList = [self.nameVariable.get(), self.yearsVariable.get(), self.echoesVariable.get(), self.coDVariable.get(), self.zeeStoryVariable.get()]
         self.xml = self.writer.generateXML(self.storyList)
-        self.fileName = '' + self.storyList[0] + '.xml'
-        self.writer.xMLToFile(self.xml, self.fileName)
+        self.writer.xmlToFile(self.xml)
         self.labelVariable.set(self.nameVariable.get()+"'s story has been recorded")
         self.name.focus_set()
         self.name.selection_range(0, Tkinter.END)
 
     def onButtonClick(self):
-        self.storyToFile()
-        
+        self.storyToFile()       
 
     def onPressEnter(self, event):
         self.storyToFile()
