@@ -12,9 +12,9 @@ backupFile.close()
 class getValues(object):
 
     def __init__(self):
-    self.objectType = None
-    self.objectValue = None
-    self.quantity = None
+        self.objectType = None
+        self.objectValue = None
+        self.quantity = None
 
     def getBasics(self, objectType):
         if self.objectType=="fuel":
@@ -31,9 +31,9 @@ class getValues(object):
 
 class setValues(object):
     def __init__(self):
-    self.objectType = None
-    self.objectValue = None
-    self.quantity = None
+        self.objectType = None
+        self.objectValue = None
+        self.quantity = None
 
     def setValues(self, objectType, quantity):
         if self.objectType=="fuel":
@@ -43,7 +43,7 @@ class setValues(object):
         elif self.objectType=="supplies":
             self.objectValue=102026
 
-        or x in parsedJson['QualitiesPossessedList']:
+        for x in parsedJson['QualitiesPossessedList']:
             if x['AssociatedQualityId']==self.objectValue:
                 x['Level']=self.quantity
             jsonFile = open('Autosave.json', 'w+')
