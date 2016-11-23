@@ -1,4 +1,6 @@
 *.rar
 *.zip
 *.pyc
+*.sublime-project
+*.sublime-workspace
 GUI.py

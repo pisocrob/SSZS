@@ -1,5 +1,6 @@
 import Tkinter
-from pubsub import pub
+#from pubsub import pub
+import os
 from writer import XMLWriter
 
 #TODO:
@@ -7,17 +8,20 @@ from writer import XMLWriter
 #Create view stories window
 #improve descriptions/auto select etc for info entry screen
 
+size = '400x400'
+
 class Home(object):
-    def __init__(self, parent):
+    
+    def __init__(self, parent, size):
         self.root = parent
         self.frame = Tkinter.Frame(parent)
         self.frame.grid()
-        self.initialise()
-
-    def initialise(self):
+        self.initialise(size)
         
-        self.root.title('SS:ZS ~ Home')
 
+    def initialise(self, size):
+        self.root.title('SS:ZS ~ Home')
+        self.root.geometry(size)
         self.newEntryButton = Tkinter.Button(self.frame,text=u'Enter new Zee Story',command=self.newEntryClick)
         self.newEntryButton.grid(column=0,row=0,sticky='EW')
 
@@ -26,19 +30,27 @@ class Home(object):
 
     def newEntryClick(self):
         self.root.withdraw()
-        entryFrame = InfoEntry()
+        entryFrame = InfoEntry(size)
 
     def viewStoriesClick(self):
         print 'recorded stories test'
 
-
-class InfoEntry(Tkinter.Toplevel):
+class InfoViewer(Tkinter.Toplevel):
     def __init__(self):
         Tkinter.Toplevel.__init__(self)
         self.initialise()
 
     def initialise(self):
+        pass
+
+class InfoEntry(Tkinter.Toplevel):
+    def __init__(self, size):
+        Tkinter.Toplevel.__init__(self)
+        self.initialise(size)
+
+    def initialise(self, size):
         self.grid()
+        self.geometry(size)
         self.title('SS:ZS ~ Add Entry')
         self.protocol("WM_DELETE_WINDOW", root.destroy)
 
@@ -70,39 +82,40 @@ class InfoEntry(Tkinter.Toplevel):
         self.coDVariable.set('Cause of Death')
 
         #use text widget instead of Entry to allow for multiple lines.
-        #add backend functionality & button to enable upload of a .txt file?
+        #Text widget needs work around as it cannot take textvariable by default
         self.zeeStoryVariable = Tkinter.StringVar()
         self.zeeStory = Tkinter.Entry(self, textvariable=self.zeeStoryVariable)
         self.zeeStory.grid(column=0, row=4, sticky='EW')
         self.zeeStory.bind('<Return>',self.onPressEnter)
         self.zeeStoryVariable.set("Tell your Captain's story")
 
-        #will be made functional after deciding on best usage
-        #Use setuptools package resources for filepaths?
-        """self.outFilePathVariable = Tkinter.StringVar()
+        self.outFilePathVariable = Tkinter.StringVar()
         self.outFilePath = Tkinter.Entry(self, textvariable=self.outFilePathVariable)
         self.outFilePath.grid(column=0, row=5, sticky='EW')
-        self.outFilePathVariable.set()"""
+        currentPath = os.path.dirname(os.path.abspath(__file__))
+        self.outFilePath.bind('<Return>',self.onPressEnter)
+        self.outFilePathVariable.set(currentPath)
 
         submitButton = Tkinter.Button(self,text=u'Record Story',command=self.onButtonClick)
-        submitButton.grid(column=0,row=5)
+        submitButton.grid(column=0,row=6)
 
         self.labelVariable = Tkinter.StringVar()
         label = Tkinter.Label(self,textvariable=self.labelVariable,anchor='w',fg='white',bg='blue')
-        label.grid(column=0,row=6,columnspan=2,sticky='EW')
+        label.grid(column=0,row=7,columnspan=2,sticky='EW')
         self.labelVariable.set(u"Enter your Captain's story")
 
+        #self.rowconfigure(5, weight=1)
         self.grid_columnconfigure(0,weight=1)
         self.resizable(True,True)
         self.update()
-        self.geometry(self.geometry())
+        #self.geometry(self.geometry())
         self.name.focus_set()
         self.name.selection_range(0, Tkinter.END)
 
     def storyToFile(self):
         self.storyList = [self.nameVariable.get(), self.yearsVariable.get(), self.echoesVariable.get(), self.coDVariable.get(), self.zeeStoryVariable.get()]
         self.xml = self.writer.generateXML(self.storyList)
-        self.writer.xmlToFile(self.xml)
+        self.writer.xmlToFile(self.outFilePathVariable.get(), self.xml)
         self.labelVariable.set(self.nameVariable.get()+"'s story has been recorded")
         self.name.focus_set()
         self.name.selection_range(0, Tkinter.END)
@@ -115,6 +128,6 @@ class InfoEntry(Tkinter.Toplevel):
 
 if __name__ == '__main__':
     root = Tkinter.Tk()
-    app = Home(root)
+    app = Home(root, size)
     #app.title('SS:ZS ~ Info Entry')
     root.mainloop()

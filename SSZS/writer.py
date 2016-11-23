@@ -49,11 +49,11 @@ class XMLWriter(object):
     """time stamp uses everything from year to second to ensure unique file name in the event that
     a Captain's name is reused."""
     #TODO: Add flag for removal of whitespace
-    def xmlToFile(self, xmlObject):
+    def xmlToFile(self, path, xmlObject):
         self.tree = ElementTree(xmlObject)
         self.timeString = datetime.datetime.fromtimestamp(self.timeStamp).strftime(' %y%m%d%H%M%S')
         self.name = xmlObject[0].text
-        self.tree.write(self.name + self.timeString + '.xml', 'UTF-8', 'xml')
+        self.tree.write(path + self.name + self.timeString + '.xml', 'UTF-8', 'xml')
 
     def prettifyXML(self, xmlObject):
         self.roughString = tostring(xmlObject)
